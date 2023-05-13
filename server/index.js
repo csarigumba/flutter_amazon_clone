@@ -1,11 +1,25 @@
-// create a express exposting one api in port 3000
 const express = require('express');
 const app = express();
-const port = 3000;
+const mongoose = require('mongoose');
+const authRouter = require('./routes/auth');
+const DB_HOST =
+  'mongodb+srv://cediesarigumba:Nkj1TMbkiefAauCP@cluster0.zmntlxo.mongodb.net/?retryWrites=true&w=majority';
 
-app.get('/api', (req, res) => {
-  res.send('Hello World!');
-});
+app.use(authRouter);
+
+mongoose
+  .connect(DB_HOST, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
+const port = 3000;
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
