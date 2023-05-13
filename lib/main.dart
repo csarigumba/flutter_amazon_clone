@@ -1,4 +1,6 @@
 import 'package:amazon_clone_tutorial/constants/global_variables.dart';
+import 'package:amazon_clone_tutorial/features/auth/screens/auth_screen.dart';
+import 'package:amazon_clone_tutorial/routes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,19 +23,8 @@ class MyApp extends StatelessWidget {
           ),
           colorScheme:
               const ColorScheme.light(primary: GlobalVariables.secondaryColor)),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Hello World!"),
-        ),
-        body: Column(
-          children: [
-            Center(
-              child: const Text('Flutter Demo Home Page'),
-            ),
-            ElevatedButton(onPressed: () {}, child: Text("Click Me"))
-          ],
-        ),
-      ),
+      onGenerateRoute: (settings) => onGenerateRoute(settings),
+      home: const AuthScreen(),
     );
   }
 }
