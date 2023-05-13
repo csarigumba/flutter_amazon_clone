@@ -5,6 +5,7 @@ const authRouter = require('./routes/auth');
 const DB_HOST =
   'mongodb+srv://cediesarigumba:Nkj1TMbkiefAauCP@cluster0.zmntlxo.mongodb.net/?retryWrites=true&w=majority';
 
+app.use(express.json());
 app.use(authRouter);
 
 mongoose
