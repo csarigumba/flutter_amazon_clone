@@ -3,7 +3,9 @@
 A portfolio project that contains the following:
 
 - An amazone cloned application implemented in Flutter
+  - Use Form to manage validations
   - Uses Provider as state management
+  - Uses SharedPreferences to store authenticatio, caching, temporary data, etc.
 - Backend API using Node.js, express, mongodb for database, bcrypt for hashing password
 
 ## Getting Started

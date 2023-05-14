@@ -35,7 +35,7 @@ authRouter.post('/api/signin', async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(400).json({ message: 'User not found' });
     }
 
     const isMatch = await bcryptjs.compare(password, user.password);
@@ -49,6 +49,7 @@ authRouter.post('/api/signin', async (req, res) => {
       ...user._doc,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: error.message });
   }
 });
