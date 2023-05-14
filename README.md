@@ -1,6 +1,10 @@
 # amazon_clone_tutorial
 
-A new Flutter project.
+A portfolio project that contains the following:
+
+- An amazone cloned application implemented in Flutter
+  - Uses Provider as state management
+- Backend API using Node.js, express, mongodb, bcrypt for hashing password
 
 ## Getting Started
 
