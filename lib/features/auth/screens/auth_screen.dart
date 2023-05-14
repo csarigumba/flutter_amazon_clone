@@ -35,6 +35,16 @@ class _AuthScreenState extends State<AuthScreen> {
     }
   }
 
+  void signInUser() async {
+    if (_signInFormKey.currentState!.validate()) {
+      await _authService.signInUser(
+        context: context,
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+    }
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -122,7 +132,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   padding: const EdgeInsets.all(8.0),
                   color: GlobalVariables.backgroundColor,
                   child: Form(
-                    key: _signUpFormKey,
+                    key: _signInFormKey,
                     child: Column(
                       children: [
                         CustomTextField(
@@ -135,7 +145,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           hintText: "Password",
                         ),
                         const SizedBox(height: 10),
-                        CustomButton(text: "Sign in", onTap: () {})
+                        CustomButton(text: "Sign in", onTap: signInUser)
                       ],
                     ),
                   ),

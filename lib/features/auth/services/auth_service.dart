@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:amazon_clone_tutorial/constants/error_handling.dart';
 import 'package:amazon_clone_tutorial/constants/global_variables.dart';
 import 'package:amazon_clone_tutorial/constants/utils.dart';
@@ -32,13 +34,35 @@ class AuthService {
         body: user.toJson(),
       );
 
-      print(res.body);
       httpErrorHandler(
           response: res,
           context: context,
           onSuccess: () {
             showSnackBar(context: context, message: "Account created!");
           });
+    } catch (e) {
+      showSnackBar(context: context, message: e.toString());
+    }
+  }
+
+  Future<void> signInUser({
+    required BuildContext context,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      String endpoint = "$url/api/signin";
+      final res = await http.post(
+        Uri.parse(endpoint),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode({
+          "email": email,
+          "password": password,
+        }),
+      );
+      httpErrorHandler(response: res, context: context, onSuccess: () {});
     } catch (e) {
       showSnackBar(context: context, message: e.toString());
     }
