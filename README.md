@@ -4,7 +4,7 @@ A portfolio project that contains the following:
 
 - An amazone cloned application implemented in Flutter
   - Uses Provider as state management
-- Backend API using Node.js, express, mongodb, bcrypt for hashing password
+- Backend API using Node.js, express, mongodb for database, bcrypt for hashing password
 
 ## Getting Started
 

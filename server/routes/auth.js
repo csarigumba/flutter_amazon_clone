@@ -29,4 +29,22 @@ authRouter.post('/api/signup', async (req, res) => {
   }
 });
 
+// Sign in a user
+authRouter.post('/api/signup', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const isMatch = await bcryptjs.compare(password, user.password);
+     if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = authRouter;
