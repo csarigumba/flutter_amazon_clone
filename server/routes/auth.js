@@ -49,7 +49,23 @@ authRouter.post('/api/signin', async (req, res) => {
       ...user._doc,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Authentication
+authRouter.post('/api/token-is-valid', async (req, res) => {
+  try {
+    const token = req.header('x-auth-token');
+    if (!token) return res.json(false);
+
+    const verified = jwt.verify(token, 'secret');
+    if (!verified) return res.json(false);
+
+    const user = await User.findById(verified.id);
+    if (!user) return res.json(false);
+    return res.json(true);
+  } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
