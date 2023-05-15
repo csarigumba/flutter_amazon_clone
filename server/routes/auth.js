@@ -3,6 +3,7 @@ const User = require('../models/user');
 const bcryptjs = require('bcryptjs');
 const authRouter = express.Router();
 const jwt = require('jsonwebtoken');
+const auth = require('../middlewares/auth');
 
 // Signups a user
 authRouter.post('/api/signup', async (req, res) => {
@@ -71,7 +72,7 @@ authRouter.post('/api/token-is-valid', async (req, res) => {
 });
 
 // Get user
-authRouter.get('/api/user', auth, async (req, res) => {
+authRouter.get('/api/', auth, async (req, res) => {
   const user = await User.findById(req.user);
   res.json({ ...user, token: req.token });
 });
