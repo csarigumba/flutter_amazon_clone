@@ -81,4 +81,41 @@ class AuthService {
       showSnackBar(context: context, message: e.toString());
     }
   }
+
+  Future<void> getUserData(BuildContext context) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('x-auth-token');
+
+      if (token == null) {
+        prefs.setString('x-auth-token', '');
+      }
+
+      String endpoint = "$url/api/token-is-valid";
+      var tokenRes = await http.post(
+        Uri.parse(endpoint),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': token!,
+        },
+      );
+
+      var response = jsonDecode(tokenRes.body);
+      if (response == true) {
+        // Use the root API as it is the API for getting user data using JWT token
+        final userRes = await http.get(
+          Uri.parse("$url/api/"),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'x-auth-token': token,
+          },
+        );
+
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.setUser(userRes.body);
+      }
+    } catch (e) {
+      showSnackBar(context: context, message: e.toString());
+    }
+  }
 }
