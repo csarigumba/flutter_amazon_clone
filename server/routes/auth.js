@@ -73,8 +73,9 @@ authRouter.post('/api/token-is-valid', async (req, res) => {
 
 // Get user
 authRouter.get('/api/', auth, async (req, res) => {
+  console.log('Retriving user: ', req.user);
   const user = await User.findById(req.user);
-  res.json({ ...user, token: req.token });
+  res.json({ ...user._doc, token: req.token });
 });
 
 module.exports = authRouter;
