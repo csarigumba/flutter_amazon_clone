@@ -9,6 +9,22 @@ class AdminScreen extends StatefulWidget {
 }
 
 class _AdminScreenState extends State<AdminScreen> {
+  int _page = 0;
+  double bottomBarWidth = 42;
+  double bottomBarBorderWidth = 5;
+
+  final pages = [
+    const Center(child: Text("A")),
+    const Center(child: Text("B")),
+    const Center(child: Text("C")),
+  ];
+
+  void updatePage(int page) {
+    setState(() {
+      _page = page;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +58,68 @@ class _AdminScreenState extends State<AdminScreen> {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _page,
+        selectedItemColor: GlobalVariables.selectedNavBarColor,
+        unselectedItemColor: GlobalVariables.unselectedNavBarColor,
+        backgroundColor: GlobalVariables.backgroundColor,
+        onTap: updatePage,
+        items: [
+          // HOME
+          BottomNavigationBarItem(
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: _page == 0
+                        ? GlobalVariables.selectedNavBarColor
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
+                  ),
+                ),
+              ),
+              child: const Icon(Icons.home_outlined),
+            ),
+            label: '',
+          ),
+          // ANALYTICS
+          BottomNavigationBarItem(
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: _page == 1
+                        ? GlobalVariables.selectedNavBarColor
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
+                  ),
+                ),
+              ),
+              child: const Icon(Icons.analytics_outlined),
+            ),
+            label: '',
+          ),
+          // ORDERS
+          BottomNavigationBarItem(
+            icon: Container(
+                width: bottomBarWidth,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                      color: _page == 2
+                          ? GlobalVariables.selectedNavBarColor
+                          : GlobalVariables.backgroundColor,
+                      width: bottomBarBorderWidth,
+                    ),
+                  ),
+                ),
+                child: const Icon(Icons.all_inbox_outlined)),
+            label: '',
+          ),
+        ],
       ),
     );
   }
