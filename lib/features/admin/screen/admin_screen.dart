@@ -1,4 +1,5 @@
 import 'package:amazon_clone_tutorial/constants/global_variables.dart';
+import 'package:amazon_clone_tutorial/features/admin/screen/posts_screen.dart';
 import 'package:flutter/material.dart';
 
 class AdminScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _AdminScreenState extends State<AdminScreen> {
   final pages = [
     const Center(child: Text("A")),
     const Center(child: Text("B")),
-    const Center(child: Text("C")),
+    const PostsScreen(),
   ];
 
   void updatePage(int page) {
@@ -28,6 +29,7 @@ class _AdminScreenState extends State<AdminScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: pages[_page],
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
         child: AppBar(
