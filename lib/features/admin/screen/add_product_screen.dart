@@ -1,3 +1,4 @@
+import 'package:amazon_clone_tutorial/common/widgets/custom_textfield.dart';
 import 'package:amazon_clone_tutorial/constants/global_variables.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,29 @@ class AddProductScreen extends StatefulWidget {
 }
 
 class _AddProductScreenState extends State<AddProductScreen> {
+  final TextEditingController productNameController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
+  final TextEditingController quantityController = TextEditingController();
+
+  String category = 'Mobiles';
+  List<String> productCategories = [
+    'Mobiles',
+    'Essentials',
+    'Appliances',
+    'Books',
+    'Fashion'
+  ];
+
+  @override
+  void dispose() {
+    super.dispose();
+    productNameController.dispose();
+    descriptionController.dispose();
+    priceController.dispose();
+    quantityController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,6 +92,47 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   ),
                 ),
               ),
+              const SizedBox(height: 30),
+              CustomTextField(
+                controller: productNameController,
+                hintText: 'Product Name',
+              ),
+              const SizedBox(height: 10),
+              CustomTextField(
+                controller: descriptionController,
+                hintText: 'Description',
+                maxLines: 7,
+              ),
+              const SizedBox(height: 10),
+              CustomTextField(
+                controller: priceController,
+                hintText: 'Price',
+              ),
+              const SizedBox(height: 10),
+              CustomTextField(
+                controller: quantityController,
+                hintText: 'Quantity',
+              ),
+              const SizedBox(height: 10),
+              SizedBox(
+                width: double.infinity,
+                child: DropdownButton(
+                  value: category,
+                  icon: const Icon(Icons.keyboard_arrow_down),
+                  items: productCategories.map((String item) {
+                    return DropdownMenuItem(
+                      value: item,
+                      child: Text(item),
+                    );
+                  }).toList(),
+                  onChanged: (String? newVal) {
+                    setState(() {
+                      category = newVal!;
+                    });
+                  },
+                ),
+              ),
+              const SizedBox(height: 10),
             ],
           ),
         )),
