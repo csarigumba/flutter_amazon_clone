@@ -1,3 +1,4 @@
+import 'package:amazon_clone_tutorial/common/widgets/custom_button.dart';
 import 'package:amazon_clone_tutorial/common/widgets/custom_textfield.dart';
 import 'package:amazon_clone_tutorial/constants/global_variables.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -133,6 +134,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 ),
               ),
               const SizedBox(height: 10),
+              CustomButton(
+                text: 'Sell',
+                onTap: () {},
+              ),
             ],
           ),
         )),
