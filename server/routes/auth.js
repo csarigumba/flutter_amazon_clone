@@ -44,7 +44,7 @@ authRouter.post('/api/signin', async (req, res) => {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ id: user._id }, 'secret', { expiresIn: '12h' });
+    const token = jwt.sign({ id: user._id }, 'passwordKey', { expiresIn: '12h' });
     res.json({
       token,
       ...user._doc,
@@ -60,7 +60,7 @@ authRouter.post('/api/token-is-valid', async (req, res) => {
     const token = req.header('x-auth-token');
     if (!token) return res.json(false);
 
-    const verified = jwt.verify(token, 'secret');
+    const verified = jwt.verify(token, 'passwordKey');
     if (!verified) return res.json(false);
 
     const user = await User.findById(verified.id);

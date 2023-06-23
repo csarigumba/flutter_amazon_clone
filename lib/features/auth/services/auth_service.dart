@@ -42,10 +42,10 @@ class AuthService {
           response: res,
           context: context,
           onSuccess: () {
-            showSnackBar(context: context, message: "Account created!");
+            showSnackBar(context, "Account created!");
           });
     } catch (e) {
-      showSnackBar(context: context, message: e.toString());
+      showSnackBar(context, e.toString());
     }
   }
 
@@ -78,7 +78,7 @@ class AuthService {
                 context, BottomBar.routeName, (route) => false);
           });
     } catch (e) {
-      showSnackBar(context: context, message: e.toString());
+      showSnackBar(context, e.toString());
     }
   }
 
@@ -115,7 +115,7 @@ class AuthService {
         userProvider.setUser(userRes.body);
       }
     } catch (e) {
-      showSnackBar(context: context, message: e.toString());
+      showSnackBar(context, e.toString());
     }
   }
 }
